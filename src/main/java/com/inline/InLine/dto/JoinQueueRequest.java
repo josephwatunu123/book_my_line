@@ -1,4 +1,6 @@
 package com.inline.InLine.dto;
 
-public class JoinQueueRequest {
+import jakarta.validation.constraints.NotBlank;
+
+public record JoinQueueRequest(@NotBlank String customerName) {
 }
