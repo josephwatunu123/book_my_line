@@ -2,10 +2,12 @@ package com.inline.InLine.service;
 
 import com.inline.InLine.dto.CreateQueueRequest;
 import com.inline.InLine.entity.QueueSession;
+import com.inline.InLine.exception.QueueNotFoundException;
 import com.inline.InLine.repository.QueueRepository;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
+import java.util.Locale;
 
 @Service
 public class QueueService {
@@ -30,6 +32,14 @@ public class QueueService {
 
         return  queueRepository.save(queue);
 
+    }
+
+    public  QueueSession getQueueByCode (String code){
+        String normalizedCode = code.trim().toUpperCase(Locale.ROOT);
+        QueueSession queue = new QueueSession();
+        queue= queueRepository.findByCode(normalizedCode).orElseThrow(()-> new QueueNotFoundException(normalizedCode));
+
+        return  queue;
     }
 
     private  String generateUniqueCode(){

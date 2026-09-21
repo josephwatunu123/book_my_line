@@ -27,4 +27,11 @@ public class QueueController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(QueueResponse.from(createdQueue));
     }
+
+    @GetMapping("/{code}")
+    public ResponseEntity<QueueResponse> getQueueByCode(@PathVariable String code){
+        QueueSession queue = queueService.getQueueByCode(code);
+
+        return  ResponseEntity.ok(QueueResponse.from(queue));
+    }
 }
