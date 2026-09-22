@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/queues")
 public class QueueController {
@@ -50,5 +52,23 @@ public class QueueController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(response);
+    }
+
+    @GetMapping("/{code}/entries")
+    public ResponseEntity<List<QueueEntryResponse>> getWaitingEntries(
+            @PathVariable String code
+    ) {
+        List<QueueEntryResponse> entries =
+                queueEntryService.getWaitingEntries(code);
+
+        return ResponseEntity.ok(entries);
+    }
+
+    @PostMapping("/{code}/next")
+    public ResponseEntity<QueueEntryResponse> serveNext(
+            @PathVariable String code
+    ){
+        QueueEntryResponse response = queueEntryService.serveNext(code);
+        return  ResponseEntity.ok(response);
     }
 }
