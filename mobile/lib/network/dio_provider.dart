@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final dioProvider = Provider<Dio>((ref) {
   final String baseUrl = Platform.isAndroid
-      ? "http://10.0.2.2:8080"
-      : "http://localhost:8080";
+      ? "http://10.0.2.2:8080/api/queues/"
+      : "http://localhost:8080/api/queues/";
   return Dio(
     BaseOptions(
       baseUrl: baseUrl,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mobile/home_view.dart';
+import 'package:mobile/router/app_router.dart';
+import 'package:mobile/utils/global_keys.dart';
 import 'package:mobile/utils/themes.dart';
 
 void main() {
@@ -13,10 +14,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Flutter Demo',
       theme: appTheme,
-      home: const HomeView(),
+      routerConfig: appRouter,
+      scaffoldMessengerKey: rootScaffoldMessengerKey,
     );
   }
 }
