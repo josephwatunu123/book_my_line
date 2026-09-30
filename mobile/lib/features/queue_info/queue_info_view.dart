@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/constants/constants.dart';
-import 'package:mobile/features/queue/model/queue_session.dart';
 import 'package:mobile/widgets/custom_button.dart';
 
-class QueueView extends StatelessWidget {
-  const QueueView({super.key, required this.givenQueue});
+import 'model/queue_session.dart';
+
+class QueueInfoView extends StatelessWidget {
+  const QueueInfoView({super.key, required this.givenQueue});
   final QueueSession givenQueue;
 
   @override

@@ -1,8 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:mobile/features/home/home_view.dart';
-import 'package:mobile/features/queue/queue_view.dart';
-
-import '../features/queue/model/queue_session.dart';
+import 'package:mobile/features/queue_info/model/queue_session.dart';
+import 'package:mobile/features/queue_info/queue_info_view.dart';
 
 final appRouter = GoRouter(
   initialLocation: '/',
@@ -18,7 +17,7 @@ final appRouter = GoRouter(
       builder: (context, state) {
         final queue = state.extra as QueueSession;
 
-        return QueueView(givenQueue: queue);
+        return QueueInfoView(givenQueue: queue);
       },
     ),
   ],

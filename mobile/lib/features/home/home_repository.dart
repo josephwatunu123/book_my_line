@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mobile/features/queue/model/queue_session.dart';
+import 'package:mobile/features/queue_info/model/queue_session.dart';
 import 'package:mobile/network/api_exception.dart';
 import 'package:mobile/network/dio_exception_mapper.dart';
 import 'package:mobile/network/dio_provider.dart';
