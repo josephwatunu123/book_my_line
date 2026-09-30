@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/features/home/home_repository.dart';
+import 'package:mobile/features/queue/model/queue_session.dart';
 import 'package:mobile/network/api_exception.dart';
 import 'package:mobile/services/snackbar_service.dart';
 
@@ -15,7 +16,7 @@ class HomeViewmodel extends Notifier<HomeViewState> {
   @override
   build() => HomeViewState();
 
-  Future<void> onGetQueue() async {
+  Future<QueueSession?> onGetQueue() async {
     state = state.copyWith(isLoading: true);
     final inputError = validateCode();
     if (inputError != null) {
@@ -24,11 +25,11 @@ class HomeViewmodel extends Notifier<HomeViewState> {
         shouldShowValidationErrors: true,
         isLoading: false,
       );
-      return;
+      return null;
     }
     final code = state.code!.trim().toUpperCase();
     try {
-      await homeRepository.getQueue(code);
+      return await homeRepository.getQueue(code);
     } on ApiException catch (error) {
       SnackBarService.show(
         message: error.message,
@@ -38,6 +39,7 @@ class HomeViewmodel extends Notifier<HomeViewState> {
     } finally {
       state = state.copyWith(isLoading: false);
     }
+    return null;
   }
 
   String? validateCode() {

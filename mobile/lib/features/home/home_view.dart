@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile/widgets/custom_button.dart';
 import 'package:mobile/widgets/custom_form_field.dart';
 
@@ -117,7 +118,11 @@ class HomeView extends ConsumerWidget {
                     buttonText: "Join Queue",
                     buttonColor: theme.colorScheme.secondary,
                     suffixIcon: Icons.arrow_right_alt_outlined,
-                    onTap: viewModel.onGetQueue,
+                    onTap: () async {
+                      final queue = await viewModel.onGetQueue();
+                      if (queue == null || !context.mounted) return;
+                      context.pushNamed('queue', extra: queue);
+                    },
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
